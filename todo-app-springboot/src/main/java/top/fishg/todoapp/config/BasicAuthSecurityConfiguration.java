@@ -1,4 +1,4 @@
-package top.fishg.todoapp;
+package top.fishg.todoapp.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,32 +1,30 @@
 package top.fishg.todoapp.service;
 
-import org.springframework.stereotype.Service;
-
-import java.util.Collection;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
+import org.springframework.stereotype.Service;
 import top.fishg.todoapp.model.TodoUser;
-import top.fishg.todoapp.repository.TodoUserJpaRepository;
+import top.fishg.todoapp.repository.TodoUserRepository;
+
+import java.util.Collection;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class TodoUserDetailsService implements UserDetailsService {
-    private final TodoUserJpaRepository todoUserJpaRepository;
+    private final TodoUserRepository todoUserRepository;
 
-    public TodoUserDetailsService(TodoUserJpaRepository todoUserJpaRepository) {
-        this.todoUserJpaRepository = todoUserJpaRepository;
+    public TodoUserDetailsService(TodoUserRepository todoUserRepository) {
+        this.todoUserRepository = todoUserRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        TodoUser user = todoUserJpaRepository.findByEmail(username)
+        TodoUser user = todoUserRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + username));
 
         return new User(user.getEmail(), user.getPassword(),

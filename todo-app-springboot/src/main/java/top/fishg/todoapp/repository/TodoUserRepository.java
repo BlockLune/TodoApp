@@ -7,6 +7,6 @@ import top.fishg.todoapp.model.TodoUser;
 import java.util.Optional;
 
 @Repository
-public interface TodoUserJpaRepository extends JpaRepository<TodoUser, Long> {
+public interface TodoUserRepository extends JpaRepository<TodoUser, Long> {
     Optional<TodoUser> findByEmail(String email);
 }

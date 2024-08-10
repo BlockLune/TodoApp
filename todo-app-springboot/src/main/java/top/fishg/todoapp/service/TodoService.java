@@ -2,40 +2,40 @@ package top.fishg.todoapp.service;
 
 import org.springframework.stereotype.Service;
 import top.fishg.todoapp.model.Todo;
-import top.fishg.todoapp.repository.TodoJpaRepository;
+import top.fishg.todoapp.repository.TodoRepository;
 
 import java.util.List;
 
 @Service
 public class TodoService {
-    private final TodoJpaRepository todoJpaRepository;
+    private final TodoRepository todoRepository;
 
-    public TodoService(TodoJpaRepository todoJpaRepository) {
-        this.todoJpaRepository = todoJpaRepository;
+    public TodoService(TodoRepository todoRepository) {
+        this.todoRepository = todoRepository;
     }
 
     public void addOrUpdateTodo(Todo todo) {
-        todoJpaRepository.save(todo);
+        todoRepository.save(todo);
     }
 
     public void deleteTodoById(Long id) {
-        todoJpaRepository.deleteById(id);
+        todoRepository.deleteById(id);
     }
 
     public Todo getTodoById(Long id) {
-        return todoJpaRepository.findById(id).orElse(null);
+        return todoRepository.findById(id).orElse(null);
     }
 
     public List<Todo> getAllTodos() {
-        return todoJpaRepository.findAll();
+        return todoRepository.findAll();
     }
 
     public List<Todo> getTodosByUserId(Long userId) {
-        return todoJpaRepository.findByUserId(userId);
+        return todoRepository.findByUserId(userId);
     }
 
     public void deleteTodosByUserId(Long userId) {
-        todoJpaRepository.deleteByUserId(userId);
+        todoRepository.deleteByUserId(userId);
     }
 
 }

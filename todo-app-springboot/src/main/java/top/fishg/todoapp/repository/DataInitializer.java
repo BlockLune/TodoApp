@@ -12,7 +12,7 @@ import java.util.Set;
 public class DataInitializer implements CommandLineRunner {
 
     @Autowired
-    private TodoUserJpaRepository userRepository;
+    private TodoUserRepository userRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;

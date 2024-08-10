@@ -7,7 +7,7 @@ import top.fishg.todoapp.model.Todo;
 import java.util.List;
 
 @Repository
-public interface TodoJpaRepository extends JpaRepository<Todo, Long> {
+public interface TodoRepository extends JpaRepository<Todo, Long> {
     List<Todo> findByUserId(Long userId);
     void deleteByUserId(Long userId);
 }

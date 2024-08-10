@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import top.fishg.todoapp.model.TodoUser;
+import top.fishg.todoapp.repository.auth.RefreshTokenRepository;
 
 import java.util.Set;
 
@@ -13,6 +14,9 @@ public class DataInitializer implements CommandLineRunner {
 
     @Autowired
     private TodoUserRepository userRepository;
+
+    @Autowired
+    private RefreshTokenRepository refreshTokenRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -35,5 +39,8 @@ public class DataInitializer implements CommandLineRunner {
             userRepository.save(user);
 
         }
+
+        // Clear all refresh tokens on startup
+        refreshTokenRepository.deleteAll();
     }
 }

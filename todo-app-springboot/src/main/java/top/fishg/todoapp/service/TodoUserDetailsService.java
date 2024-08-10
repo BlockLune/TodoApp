@@ -14,19 +14,19 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import top.fishg.todoapp.model.TodoUser;
-import top.fishg.todoapp.repository.UserJpaRepository;
+import top.fishg.todoapp.repository.TodoUserJpaRepository;
 
 @Service
 public class TodoUserDetailsService implements UserDetailsService {
-    private final UserJpaRepository userJpaRepository;
+    private final TodoUserJpaRepository todoUserJpaRepository;
 
-    public TodoUserDetailsService(UserJpaRepository userJpaRepository) {
-        this.userJpaRepository = userJpaRepository;
+    public TodoUserDetailsService(TodoUserJpaRepository todoUserJpaRepository) {
+        this.todoUserJpaRepository = todoUserJpaRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        TodoUser user = userJpaRepository.findByEmail(username)
+        TodoUser user = todoUserJpaRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + username));
 
         return new User(user.getEmail(), user.getPassword(),

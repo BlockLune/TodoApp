@@ -1,4 +1,4 @@
-package top.fishg.todoapp.config.jwt;
+package top.fishg.todoapp.config;
 
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.jwk.JWKSet;
@@ -42,7 +42,7 @@ public class JwtSecurityConfiguration {
         return http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
-                        .requestMatchers("/authenticate").authenticated()
+                        .requestMatchers("/api/auth/login").authenticated()
                         .anyRequest().authenticated())
                 .httpBasic(basic -> basic.authenticationEntryPoint(basicAuthenticationEntryPoint()))
                 .userDetailsService(userDetailsService)
@@ -56,9 +56,11 @@ public class JwtSecurityConfiguration {
 
     @Bean
     public AuthenticationEntryPoint basicAuthenticationEntryPoint() {
-        return new BasicAuthenticationEntryPoint() {{
-            setRealmName("Basic Authentication");
-        }};
+        return new BasicAuthenticationEntryPoint() {
+            {
+                setRealmName("Basic Authentication");
+            }
+        };
     }
 
     @Bean

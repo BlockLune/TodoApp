@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface TodoUserRepository extends JpaRepository<TodoUser, Long> {
     Optional<TodoUser> findByEmail(String email);
+    void deleteByEmail(String email);
 }

@@ -1,8 +1,12 @@
 package top.fishg.todoapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -30,6 +34,7 @@ public class TodoUser {
 
     @Column(nullable = false)
     @Schema(description = "The password of the user. Stored as a bcrypt hash")
+    @JsonIgnore
     private String password;
 
     @Column

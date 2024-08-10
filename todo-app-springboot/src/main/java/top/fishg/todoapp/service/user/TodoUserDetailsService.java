@@ -1,4 +1,4 @@
-package top.fishg.todoapp.service;
+package top.fishg.todoapp.service.user;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

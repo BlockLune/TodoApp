@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -34,6 +35,7 @@ public class TodoUserController {
             description = "Only admin can get all users",
             tags = {"user"}
     )
+    @SecurityRequirement(name = "Bearer Authentication")
     @GetMapping("/")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Iterable<TodoUser>> getAllUsers() {
@@ -48,8 +50,10 @@ public class TodoUserController {
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User retrieved"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized"),
             @ApiResponse(responseCode = "404", description = "User not found")
     })
+    @SecurityRequirement(name = "Bearer Authentication")
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     public ResponseEntity<TodoUser> getUserById(@Parameter @PathVariable("id") Long id) {
@@ -90,8 +94,10 @@ public class TodoUserController {
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User updated"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized"),
             @ApiResponse(responseCode = "404", description = "User not found")
     })
+    @SecurityRequirement(name = "Bearer Authentication")
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     public ResponseEntity<TodoUser> updateUser(@Parameter @PathVariable("id") Long id, @RequestBody AddOrUpdateTodoUserRequest request) {
@@ -113,8 +119,10 @@ public class TodoUserController {
             tags = {"user"}
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "User deleted")
+            @ApiResponse(responseCode = "204", description = "User deleted"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized")
     })
+    @SecurityRequirement(name = "Bearer Authentication")
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     public ResponseEntity<Void> deleteUserById(@Parameter @PathVariable("id") Long id) {

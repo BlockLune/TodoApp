@@ -14,8 +14,8 @@ public class TodoService {
         this.todoRepository = todoRepository;
     }
 
-    public void addOrUpdateTodo(Todo todo) {
-        todoRepository.save(todo);
+    public Todo addOrUpdateTodo(Todo todo) {
+        return todoRepository.save(todo);
     }
 
     public void deleteTodoById(Long id) {

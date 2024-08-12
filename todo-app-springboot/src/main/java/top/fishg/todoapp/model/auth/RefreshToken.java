@@ -13,8 +13,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import top.fishg.todoapp.model.TodoUser;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "refresh_token")
 @Schema(description = "A refresh token object")
@@ -38,46 +46,4 @@ public class RefreshToken {
     @JsonIgnore
     @Schema(description = "The user who owns the refresh token")
     private TodoUser todoUser;
-
-    public RefreshToken() {
-    }
-
-    public RefreshToken(Long id, String token, Instant expiryDate, TodoUser todoUser) {
-        this.id = id;
-        this.token = token;
-        this.expiryDate = expiryDate;
-        this.todoUser = todoUser;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public Instant getExpiryDate() {
-        return expiryDate;
-    }
-
-    public void setExpiryDate(Instant expiryDate) {
-        this.expiryDate = expiryDate;
-    }
-
-    public TodoUser getTodoUser() {
-        return todoUser;
-    }
-
-    public void setTodoUser(TodoUser todoUser) {
-        this.todoUser = todoUser;
-    }
 }

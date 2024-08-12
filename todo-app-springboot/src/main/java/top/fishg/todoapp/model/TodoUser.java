@@ -21,7 +21,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "user")
 @Schema(description = "A user")
@@ -56,55 +64,8 @@ public class TodoUser {
                 .collect(Collectors.toSet());
     }
 
-    public TodoUser() {
-    }
-
-    public TodoUser(Long id, String email, String password, String name, Set<String> roles) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.roles = roles;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     // Custom method to get roles (defensive copy)
     public Set<String> getRoles() {
         return new HashSet<>(roles);
-    }
-
-    public void setRoles(Set<String> roles) {
-        this.roles = roles;
     }
 }

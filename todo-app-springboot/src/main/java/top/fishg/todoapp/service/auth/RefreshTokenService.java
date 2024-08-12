@@ -23,11 +23,11 @@ public class RefreshTokenService {
     }
 
     public RefreshToken create(String email) {
-        RefreshToken refreshToken = RefreshToken.builder()
-                .todoUser(userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException("User not found with email: " + email)))
-                .token(UUID.randomUUID().toString())
-                .expiryDate(Instant.now().plusSeconds(60 * 60 * 24)) // 24 hours
-                .build();
+        RefreshToken refreshToken = new RefreshToken();
+        refreshToken.setTodoUser(userRepository.findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException("User not found with email: " + email)));
+        refreshToken.setToken(UUID.randomUUID().toString());
+        refreshToken.setExpiryDate(Instant.now().plusSeconds(60 * 60 * 24)); // 24 hours
         return refreshTokenRepository.save(refreshToken);
     }
 
@@ -41,14 +41,14 @@ public class RefreshTokenService {
 
     public void deleteByEmail(String email) {
         userRepository.findByEmail(email).ifPresent(
-                refreshTokenRepository::deleteByTodoUser
-        );
+                refreshTokenRepository::deleteByTodoUser);
     }
 
     public RefreshToken verifyExpiration(RefreshToken token) {
         if (token.getExpiryDate().compareTo(Instant.now()) < 0) {
             refreshTokenRepository.delete(token);
-            throw new RefreshTokenInvalidException("Refresh token (" + token.getToken() + ") is expired. Please make a new login!");
+            throw new RefreshTokenInvalidException(
+                    "Refresh token (" + token.getToken() + ") is expired. Please make a new login!");
         }
         return token;
     }

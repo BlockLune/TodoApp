@@ -23,6 +23,8 @@ public class RefreshTokenService {
     }
 
     public RefreshToken create(String email) {
+        deleteByEmail(email); // delete the possible existing refresh token
+
         RefreshToken refreshToken = new RefreshToken();
         refreshToken.setTodoUser(userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("User not found with email: " + email)));

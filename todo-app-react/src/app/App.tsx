@@ -1,5 +1,6 @@
 import Header from "../components/Header";
 import SideMenu from "../components/SideMenu";
+import TodoDetail from "../components/TodoDetail";
 import TodoItem from "../components/TodoItem";
 
 export default function App() {
@@ -12,6 +13,7 @@ export default function App() {
           <TodoItem text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, hic?" />
           <TodoItem text="Lorem ipsum dolor sit amet consectetur adipisicing." />
         </main>
+        <TodoDetail />
       </div>
     </div>
   );

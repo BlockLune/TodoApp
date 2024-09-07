@@ -1,0 +1,30 @@
+import Check from "./Check";
+import Star from "./Star";
+
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+
+type TodoItemProps = {
+    text: string;
+};
+
+export default function TodoDetailItem({ text }: TodoItemProps) {
+    return (
+        <div className="flex flex-col">
+            <div className="w-full h-14 rounded-full p-2 flex flex-1 items-center justify-between transition hover:bg-slate-50 hover:shadow hover:cursor-pointer">
+                <div className="flex items-center w-full">
+                    <Check />
+                    <p className="p-2">{text}</p>
+                </div>
+                <div className="flex items-center">
+                    <Star />
+                </div>
+            </div>
+            <button className="w-full h-14 rounded-full p-2 flex flex-1 items-center transition hover:bg-slate-50 hover:shadow hover:cursor-pointer">
+                <span className="p-2 text-slate-400">
+                    <WbSunnyIcon />
+                </span>
+                <span className="p-2">Add to Today</span>
+            </button>
+        </div>
+    );
+}

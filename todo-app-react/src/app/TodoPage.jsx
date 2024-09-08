@@ -3,7 +3,7 @@ import SideMenu from "../components/SideMenu";
 import TodoDetail from "../components/TodoDetail";
 import TodoItem from "../components/TodoItem";
 
-export default function App() {
+export default function TodoPage() {
   return (
     <div className="flex flex-col h-screen">
       <Header />
